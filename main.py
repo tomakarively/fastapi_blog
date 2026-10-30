@@ -33,7 +33,7 @@ async def lifespan(_app: FastAPI):
     await engine.dispose()
 
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 
 app.mount("/media", StaticFiles(directory="media"), name="media")
 

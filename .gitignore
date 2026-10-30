@@ -11,3 +11,9 @@ wheels/
 
 #database
 *.db
+*.sqlite3
+
+#env
+.env
+
+notes.txt
