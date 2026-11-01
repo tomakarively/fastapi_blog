@@ -11,13 +11,14 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from typing import Annotated
 
-from sqlalchemy import select
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from database import Base, engine, get_db
 
 from routers import posts, users
+from config import settings
 
 # safe to run multiple times. It's idempontent. if not creates, if there does nothing
 # Base.metadata.create_all(bind=engine)
