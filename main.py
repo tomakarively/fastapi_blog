@@ -15,7 +15,7 @@ from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from database import Base, engine, get_db
+from database import engine, get_db
 
 from routers import posts, users
 from config import settings
@@ -26,17 +26,12 @@ from config import settings
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
-    # startup
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
     yield
     # shutdown
     await engine.dispose()
 
 
 app = FastAPI(lifespan=lifespan)
-
-app.mount("/media", StaticFiles(directory="media"), name="media")
 
 app.include_router(users.router, prefix="/api/users", tags=["users"])
 app.include_router(posts.router, prefix="/api/posts", tags=["posts"])
