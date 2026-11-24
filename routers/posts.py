@@ -44,7 +44,7 @@ async def get_posts(
     )
 
 
-@router.post("", response_model=PostCreate, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=PostResponse, status_code=status.HTTP_201_CREATED)
 async def create_post(
     post: PostCreate,
     current_user: CurrentUser,
